@@ -1,0 +1,38 @@
+{
+  "expo": {
+    "name": "Lifehealth",
+    "slug": "Lifehealth",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000",
+      "updates": {
+        "fallbackToCacheTimeout": 0
+      },
+      "assetBundlePatterns": [
+        "**/*"
+      ],
+      "ios": {
+        "userInterfaceStyle": "automatic",
+        "bundleIdentifier": "com.joaovictor.Lifehealth",
+        "buildNumber": "1.0.0"
+      },
+      "android": {
+        "userInterfaceStyle": "automatic",
+        "adaptiveIcon": {
+          "foregroundImage": "./assets/adaptive-icon.png",
+          "backgroundColor": "#000000"
+        },
+        "package": "com.joaovictor.Lifehealth",
+        "versionCode": 1
+      }
+    },
+    "android": {
+      "package": "com.joaovictor18.Lifehealth"
+    }
+  }
+}
