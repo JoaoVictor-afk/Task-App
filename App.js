@@ -1,16 +1,7 @@
-import React from "react";
-import {
-	NavigationContainer,
-	DefaultTheme,
-	DarkTheme,
-} from "@react-navigation/native";
+import React, { useState, useEffect } from "react";
+import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import {
-	AppearanceProvider,
-	useColorScheme,
-	Appearance,
-} from "react-native-appearance";
+import { ThemeProvider, DefaultTheme } from "styled-components";
 import { StyleSheet, Switch, TSwitch } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Task from "./src/pages/Task";
@@ -21,121 +12,120 @@ import NewUser from "./src/pages/NewUser";
 
 const Stack = createStackNavigator();
 
-export const ThemeContext = React.createContext();
-
 export default function App() {
-	const [isEnabled, setIsEnabled] = useState(false);
+	const [theme, setTheme] = useState("light");
 
-	const getTheme = async () => {
+	const storeKey = "myPreference";
+
+	const dark = {
+		colors: {
+			primary: "rgb(255, 45, 85)",
+			background: "#000",
+			card: "#f92a69",
+			text: "#fff",
+		},
+	};
+	const light = {
+		colors: {
+			primary: "#f92a69",
+			background: "#fff",
+			card: "#f92a69",
+			text: "#fff",
+		},
+	};
+
+	const toggleTheme = () => {
+		theme === "light" ? setTheme("dark") : setTheme("light");
+	};
+
+	storeData = async () => {
 		try {
-			const theme = await AsyncStorage.getItem("theme");
-			return theme;
+			await AsyncStorage.setItem(storeKey, theme);
 		} catch (error) {
-			console.log("error", error);
+			// Error saving data
 		}
 	};
 
-	const setTheme = async (theme) => {
+	retrieveData = async (storeKey) => {
 		try {
-			await AsyncStorage.setItem("theme", theme);
+			const value = await AsyncStorage.getItem(storeKey);
+			if (value !== "light") {
+				setTheme(value);
+				console.log(value);
+			}
 		} catch (error) {
-			console.log("error", error);
-		}
-	};
-
-	useEffect(() => {
-		getTheme()
-			.then((res) => {
-				setIsEnabled(res === "light");
-			})
-			.catch((err) => {
-				console.log("error", err);
-			});
-	}, []);
-
-	const onChangeHandler = (value) => {
-		if (value) {
-			setIsEnabled(true);
-			setTheme("light");
-		} else {
-			setIsEnabled(false);
-			setTheme("dark");
+			// Error retrieving data
 		}
 	};
 
 	return (
-		<ThemeContext.Provider value={themeData}>
-			<NavigationContainer
-				theme={isEnabled === false ? DarkTheme : DefaultTheme}
-			>
-				<Stack.Navigator initialRouteName="Login">
-					<Stack.Screen
-						name="Login"
-						component={Login}
-						options={{
-							headerShown: false,
-							headerTitleStyle: {
-								fontWeight: "bold",
-							},
-						}}
-					/>
-					<Stack.Screen
-						name="NewUser"
-						component={NewUser}
-						options={{
-							headerShown: false,
-							headerTitleStyle: {
-								fontWeight: "bold",
-							},
-						}}
-					/>
-					<Stack.Screen
-						name="Task"
-						component={Task}
-						options={{
-							headerLeft: null,
+		<NavigationContainer theme={theme === "light" ? light : dark}>
+			<Stack.Navigator initialRouteName="Login">
+				<Stack.Screen
+					name="Login"
+					component={Login}
+					options={{
+						headerShown: false,
+						headerTitleStyle: {
+							fontWeight: "bold",
+						},
+					}}
+				/>
+				<Stack.Screen
+					name="NewUser"
+					component={NewUser}
+					options={{
+						headerShown: false,
+						headerTitleStyle: {
+							fontWeight: "bold",
+						},
+					}}
+				/>
+				<Stack.Screen
+					name="Task"
+					component={Task}
+					options={{
+						headerLeft: null,
 
-							headerTitleStyle: {
-								fontWeight: "bold",
-							},
-							headerRight: () => (
-								<Switch
-									style={styles.switchbutton}
-									onValueChange={onChangeHandler}
-									title="Trocar"
-									color="#000"
-								/>
-							),
-						}}
-					/>
-					<Stack.Screen
-						name="NewTask"
-						component={NewTask}
-						options={{
-							headerTitleStyle: {
-								fontWeight: "bold",
-							},
-						}}
-					/>
-					<Stack.Screen
-						name="Details"
-						component={Details}
-						options={{
-							headerTitleStyle: {
-								fontWeight: "bold",
-							},
-						}}
-					/>
-				</Stack.Navigator>
-			</NavigationContainer>
-		</ThemeContext.Provider>
+						headerTitleStyle: {
+							fontWeight: "bold",
+						},
+						headerRight: () => (
+							<Switch
+								style={styles.switchbutton}
+								onChange={toggleTheme}
+								color="#000"
+							/>
+						),
+					}}
+				/>
+				<Stack.Screen
+					name="NewTask"
+					component={NewTask}
+					options={{
+						headerTitleStyle: {
+							fontWeight: "bold",
+						},
+					}}
+				/>
+				<Stack.Screen
+					name="Details"
+					component={Details}
+					options={{
+						headerTitleStyle: {
+							fontWeight: "bold",
+						},
+					}}
+				/>
+			</Stack.Navigator>
+		</NavigationContainer>
 	);
 }
 
 const styles = StyleSheet.create({
 	switchbutton: {
-		width: 20,
-		height: 20,
+		width: 80,
+		height: 40,
 		backgroundColor: "#f92a69",
 	},
 });
