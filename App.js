@@ -10,6 +10,7 @@ import {
 	useColorScheme,
 	Appearance,
 } from "react-native-appearance";
+import { StyleSheet, TouchableOpacity } from "react-native";
 
 import Task from "./src/pages/Task";
 import NewTask from "./src/pages/NewTask/index";
@@ -60,9 +61,10 @@ export default function App() {
 								fontWeight: "bold",
 							},
 							headerRight: () => (
-								<Button
+								<TouchableOpacity
+									style={styles.switchbutton}
 									onPress={() => setTheme(theme === "Light" ? "Dark" : "Light")}
-									title="Info"
+									title="Trocar"
 									color="#000"
 								/>
 							),
@@ -91,3 +93,12 @@ export default function App() {
 		</ThemeContext.Provider>
 	);
 }
+
+const styles = StyleSheet.create({
+	switchbutton: {
+		width: 20,
+		height: 20,
+		backgroundColor: "#f92a69",
+	},
+});
+
