@@ -10,8 +10,8 @@ import {
 	useColorScheme,
 	Appearance,
 } from "react-native-appearance";
-import { StyleSheet, TouchableOpacity } from "react-native";
-
+import { StyleSheet, Switch, TSwitch } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Task from "./src/pages/Task";
 import NewTask from "./src/pages/NewTask/index";
 import Details from "./src/pages/Details/index";
@@ -23,9 +23,53 @@ const Stack = createStackNavigator();
 export const ThemeContext = React.createContext();
 
 export default function App() {
-	const [theme, setTheme] = useState("Light");
+	const [isEnabled, setIsEnabled] = useState(false);
 
-	const themeData = { theme, setTheme };
+	const getTheme = async () => {
+		try {
+			const theme = await AsyncStorage.getItem("theme");
+			return theme;
+		} catch (error) {
+			console.log("error", error);
+		}
+	};
+
+	const styles = StyleSheet.create({
+		container: {
+			flex: 1,
+			backgroundColor: `${isEnabled ? "#fff" : "#000"}`,
+			alignItems: "center",
+			justifyContent: "center",
+		},
+	});
+
+	const setTheme = async (theme) => {
+		try {
+			await AsyncStorage.setItem("theme", theme);
+		} catch (error) {
+			console.log("error", error);
+		}
+	};
+
+	useEffect(() => {
+		getTheme()
+			.then((res) => {
+				setIsEnabled(res === "light");
+			})
+			.catch((err) => {
+				console.log("error", err);
+			});
+	}, []);
+
+	const onChangeHandler = (value) => {
+		if (value) {
+			setIsEnabled(true);
+			setTheme("light");
+		} else {
+			setIsEnabled(false);
+			setTheme("dark");
+		}
+	};
 
 	return (
 		<ThemeContext.Provider value={themeData}>
@@ -61,9 +105,9 @@ export default function App() {
 								fontWeight: "bold",
 							},
 							headerRight: () => (
-								<TouchableOpacity
+								<Switch
 									style={styles.switchbutton}
-									onPress={() => setTheme(theme === "Light" ? "Dark" : "Light")}
+									onValueChange={onChangeHandler}
 									title="Trocar"
 									color="#000"
 								/>
@@ -101,4 +145,3 @@ const styles = StyleSheet.create({
 		backgroundColor: "#f92a69",
 	},
 });
-
