@@ -5,7 +5,11 @@ import {
 	DarkTheme,
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { AppearanceProvider, useColorScheme } from "react-native-appearance";
+import {
+	AppearanceProvider,
+	useColorScheme,
+	Appearance,
+} from "react-native-appearance";
 
 import Task from "./src/pages/Task";
 import NewTask from "./src/pages/NewTask/index";
@@ -15,32 +19,16 @@ import NewUser from "./src/pages/NewUser";
 
 const Stack = createStackNavigator();
 
-const darkTheme = {
-	colors: {
-		primary: "rgb(255, 45, 85)",
-		background: "#000",
-		card: "#f92e6a",
-		text: "#fff",
-	},
-};
-
-const lightTheme = {
-	colors: {
-		primary: "rgb(255, 45, 85)",
-		background: "#fff",
-		card: "#f92e6a",
-		text: "#000",
-	},
-};
+export const ThemeContext = React.createContext();
 
 export default function App() {
-	const colorScheme = useColorScheme();
+	const [theme, setTheme] = useState("Light");
+
+	const themeData = { theme, setTheme };
 
 	return (
-		<AppearanceProvider>
-			<NavigationContainer
-				theme={colorScheme === "dark" ? darkTheme : lightTheme}
-			>
+		<ThemeContext.Provider value={themeData}>
+			<NavigationContainer theme={theme === "dark" ? DarkTheme : DefaultTheme}>
 				<Stack.Navigator initialRouteName="Login">
 					<Stack.Screen
 						name="Login"
@@ -71,6 +59,13 @@ export default function App() {
 							headerTitleStyle: {
 								fontWeight: "bold",
 							},
+							headerRight: () => (
+								<Button
+									onPress={() => setTheme(theme === "Light" ? "Dark" : "Light")}
+									title="Info"
+									color="#000"
+								/>
+							),
 						}}
 					/>
 					<Stack.Screen
@@ -93,6 +88,6 @@ export default function App() {
 					/>
 				</Stack.Navigator>
 			</NavigationContainer>
-		</AppearanceProvider>
+		</ThemeContext.Provider>
 	);
 }
