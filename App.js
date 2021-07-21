@@ -5,6 +5,7 @@ import {
 	DarkTheme,
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
 	AppearanceProvider,
 	useColorScheme,
@@ -64,7 +65,9 @@ export default function App() {
 
 	return (
 		<ThemeContext.Provider value={themeData}>
-			<NavigationContainer theme={theme === "dark" ? DarkTheme : DefaultTheme}>
+			<NavigationContainer
+				theme={isEnabled === false ? DarkTheme : DefaultTheme}
+			>
 				<Stack.Navigator initialRouteName="Login">
 					<Stack.Screen
 						name="Login"
