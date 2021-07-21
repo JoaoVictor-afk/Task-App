@@ -34,15 +34,6 @@ export default function App() {
 		}
 	};
 
-	const styles = StyleSheet.create({
-		container: {
-			flex: 1,
-			backgroundColor: `${isEnabled ? "#fff" : "#000"}`,
-			alignItems: "center",
-			justifyContent: "center",
-		},
-	});
-
 	const setTheme = async (theme) => {
 		try {
 			await AsyncStorage.setItem("theme", theme);
