@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { StyleSheet, Switch, TouchableOpacity } from "react-native";
+import { StyleSheet, Switch, TouchableOpacity, Text } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Icon from "@mdi/react";
-import { mdiThemeLightDark } from "@mdi/js";
+
+import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import Task from "./src/pages/Task";
 import NewTask from "./src/pages/NewTask/index";
 import Details from "./src/pages/Details/index";
@@ -37,26 +37,6 @@ export default function App() {
 
 	const toggleTheme = () => {
 		theme === "light" ? setTheme("dark") : setTheme("light");
-	};
-
-	storeData = async () => {
-		try {
-			await AsyncStorage.setItem(storeKey, theme);
-		} catch (error) {
-			// Error saving data
-		}
-	};
-
-	retrieveData = async (storeKey) => {
-		try {
-			const value = await AsyncStorage.getItem(storeKey);
-			if (value !== "light") {
-				setTheme(value);
-				console.log(value);
-			}
-		} catch (error) {
-			// Error retrieving data
-		}
 	};
 
 	return (
@@ -97,14 +77,11 @@ export default function App() {
 								onChange={toggleTheme}
 								color="#000"
 							>
-								<Text>
-									<Icon
-										path={mdiThemeLightDark}
-										size={20}
-										rotate={90}
-										spin={true}
-									/>
-								</Text>
+								<MaterialCommunityIcons
+									name="theme-light-dark"
+									size={30}
+									color="#f92e6a"
+								/>
 							</TouchableOpacity>
 						),
 					}}
@@ -139,4 +116,3 @@ const styles = StyleSheet.create({
 		backgroundColor: "#f92a69",
 	},
 });
-
