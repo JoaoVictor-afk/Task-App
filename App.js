@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { NavigationContainer, DarkTheme } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { ThemeProvider, DefaultTheme } from "styled-components";
-import { StyleSheet, Switch, TSwitch } from "react-native";
+import { StyleSheet, Switch, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Icon from "@mdi/react";
+import { mdiThemeLightDark } from "@mdi/js";
 import Task from "./src/pages/Task";
 import NewTask from "./src/pages/NewTask/index";
 import Details from "./src/pages/Details/index";
@@ -15,11 +16,11 @@ const Stack = createStackNavigator();
 export default function App() {
 	const [theme, setTheme] = useState("light");
 
-	const storeKey = "myPreference";
+	const storeKey = "Preference";
 
 	const dark = {
 		colors: {
-			primary: "rgb(255, 45, 85)",
+			primary: "#f92a69",
 			background: "#000",
 			card: "#f92a69",
 			text: "#fff",
@@ -30,7 +31,7 @@ export default function App() {
 			primary: "#f92a69",
 			background: "#fff",
 			card: "#f92a69",
-			text: "#fff",
+			text: "#000",
 		},
 	};
 
@@ -91,11 +92,20 @@ export default function App() {
 							fontWeight: "bold",
 						},
 						headerRight: () => (
-							<Switch
+							<TouchableOpacity
 								style={styles.switchbutton}
 								onChange={toggleTheme}
 								color="#000"
-							/>
+							>
+								<Text>
+									<Icon
+										path={mdiThemeLightDark}
+										size={20}
+										rotate={90}
+										spin={true}
+									/>
+								</Text>
+							</TouchableOpacity>
 						),
 					}}
 				/>
@@ -129,3 +139,4 @@ const styles = StyleSheet.create({
 		backgroundColor: "#f92a69",
 	},
 });
+
