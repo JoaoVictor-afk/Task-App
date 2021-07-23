@@ -22,7 +22,8 @@ import { ThemeProvider } from "styled-components";
 const Stack = createStackNavigator();
 
 export default function App() {
-	const [theme, setTheme] = useState("light");
+	const [theme, setTheme] = useState("");
+	const STORAGE_KEY = "preferencia";
 
 	const saveData = async () => {
 		try {
@@ -35,7 +36,7 @@ export default function App() {
 			const value = await AsyncStorage.getItem(STORAGE_KEY);
 
 			if (value !== null) {
-				setTheme(value);
+				value === "light" ? setTheme("dark") : setTheme("light");
 				console.log(value);
 			}
 		} catch (e) {
@@ -47,21 +48,21 @@ export default function App() {
 		readData();
 	}, []);
 
-	const dark = {
+	const darkTheme = {
 		colors: {
 			primary: "#000",
 			background: "#000",
-			card: "#f92a69",
+			card: "red",
 			text: "#000",
 			border: "rgb(199, 199, 204)",
 			notification: "rgb(255, 69, 58)",
 		},
 	};
-	const light = {
+	const lightTheme = {
 		colors: {
 			primary: "#fff",
 			background: "#fff",
-			card: "#f92a69",
+			card: "red",
 			text: "#fff",
 			border: "rgb(199, 199, 204)",
 			notification: "rgb(255, 69, 58)",
@@ -70,11 +71,11 @@ export default function App() {
 
 	const toggleTheme = () => {
 		theme === "light" ? setTheme("dark") : setTheme("light");
-		saveData(theme);
+		saveData(STORAGE_KEY, theme);
 	};
 
 	return (
-		<NavigationContainer theme={theme === "light" ? light : dark}>
+		<NavigationContainer theme={theme === "dark" ? darkTheme : lightTheme}>
 			<Stack.Navigator initialRouteName="Login">
 				<Stack.Screen
 					name="Login"
