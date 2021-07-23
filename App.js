@@ -10,6 +10,7 @@ import {
 	Animated,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import AppLoading from "expo-app-loading";
 
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import Task from "./src/pages/Task";
@@ -22,6 +23,7 @@ import { ThemeProvider } from "styled-components";
 const Stack = createStackNavigator();
 
 export default function App() {
+	const [Loaded, setLoaded] = useState(false);
 	const [theme, setTheme] = useState("");
 	const STORAGE_KEY = "preferencia";
 
@@ -38,15 +40,10 @@ export default function App() {
 			if (value !== null) {
 				value === "light" ? setTheme("dark") : setTheme("light");
 				console.log(value);
+				setLoaded(true);
 			}
-		} catch (e) {
-			alert("Failed to fetch the data from storage");
-		}
+		} catch (e) {}
 	};
-
-	useEffect(() => {
-		readData();
-	}, []);
 
 	const darkTheme = {
 		colors: {
@@ -73,6 +70,13 @@ export default function App() {
 		theme === "light" ? setTheme("dark") : setTheme("light");
 		saveData(STORAGE_KEY, theme);
 	};
+
+	if (!Loaded) {
+		return <AppLoading />;
+	}
+	useEffect(() => {
+		readData();
+	}, []);
 
 	return (
 		<NavigationContainer theme={theme === "dark" ? darkTheme : lightTheme}>
