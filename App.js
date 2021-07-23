@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, useTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { StyleSheet, Switch, TouchableOpacity, Text } from "react-native";
+import {
+	StyleSheet,
+	Switch,
+	TouchableOpacity,
+	Text,
+	Button,
+	Animated,
+} from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
@@ -10,33 +17,60 @@ import NewTask from "./src/pages/NewTask/index";
 import Details from "./src/pages/Details/index";
 import Login from "./src/pages/Login";
 import NewUser from "./src/pages/NewUser";
+import { ThemeProvider } from "styled-components";
 
 const Stack = createStackNavigator();
 
 export default function App() {
 	const [theme, setTheme] = useState("light");
 
-	const storeKey = "Preference";
+	const saveData = async () => {
+		try {
+			await AsyncStorage.setItem(STORAGE_KEY, theme);
+			console.log(theme);
+		} catch (e) {}
+	};
+	const readData = async () => {
+		try {
+			const value = await AsyncStorage.getItem(STORAGE_KEY);
+
+			if (value !== null) {
+				setTheme(value);
+				console.log(value);
+			}
+		} catch (e) {
+			alert("Failed to fetch the data from storage");
+		}
+	};
+
+	useEffect(() => {
+		readData();
+	}, []);
 
 	const dark = {
 		colors: {
-			primary: "#f92a69",
+			primary: "#000",
 			background: "#000",
 			card: "#f92a69",
-			text: "#fff",
+			text: "#000",
+			border: "rgb(199, 199, 204)",
+			notification: "rgb(255, 69, 58)",
 		},
 	};
 	const light = {
 		colors: {
-			primary: "#f92a69",
+			primary: "#fff",
 			background: "#fff",
 			card: "#f92a69",
-			text: "#000",
+			text: "#fff",
+			border: "rgb(199, 199, 204)",
+			notification: "rgb(255, 69, 58)",
 		},
 	};
 
 	const toggleTheme = () => {
 		theme === "light" ? setTheme("dark") : setTheme("light");
+		saveData(theme);
 	};
 
 	return (
@@ -70,18 +104,18 @@ export default function App() {
 
 						headerTitleStyle: {
 							fontWeight: "bold",
+							fontSize: 28,
 						},
 						headerRight: () => (
-							<TouchableOpacity
-								style={styles.switchbutton}
-								onChange={toggleTheme}
-								color="#000"
-							>
-								<MaterialCommunityIcons
-									name="theme-light-dark"
-									size={30}
-									color="#f92e6a"
-								/>
+							<TouchableOpacity onPress={toggleTheme}>
+								<Text>
+									<MaterialCommunityIcons
+										name="theme-light-dark"
+										size={40}
+										fontWeight="bold"
+										color="#b5b5b5"
+									/>
+								</Text>
 							</TouchableOpacity>
 						),
 					}}
@@ -108,11 +142,3 @@ export default function App() {
 		</NavigationContainer>
 	);
 }
-
-const styles = StyleSheet.create({
-	switchbutton: {
-		width: 80,
-		height: 40,
-		backgroundColor: "#f92a69",
-	},
-});
