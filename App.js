@@ -92,7 +92,7 @@ export default function App() {
 					}}
 				/>
 				<Stack.Screen
-					name="NewUser"
+					name="Novo usuario "
 					component={NewUser}
 					options={{
 						headerShown: false,
@@ -102,7 +102,7 @@ export default function App() {
 					}}
 				/>
 				<Stack.Screen
-					name="Task"
+					name="E.Estoque"
 					component={Task}
 					options={{
 						headerLeft: null,
@@ -126,8 +126,8 @@ export default function App() {
 					}}
 				/>
 				<Stack.Screen
-					name="NewTask"
-					component={NewTask}
+					name="Novo Item"
+					component={Newtask}
 					options={{
 						headerTitleStyle: {
 							fontWeight: "bold",
@@ -135,7 +135,7 @@ export default function App() {
 					}}
 				/>
 				<Stack.Screen
-					name="Details"
+					name="Editar item"
 					component={Details}
 					options={{
 						headerTitleStyle: {
