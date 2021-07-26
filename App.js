@@ -8,6 +8,7 @@ import {
 	Text,
 	Button,
 	Animated,
+	View,
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AppLoading from "expo-app-loading";
@@ -84,7 +85,11 @@ export default function App() {
 	return (
 		<NavigationContainer theme={theme === "dark" ? darkTheme : lightTheme}>
 			<Stack.Navigator initialRouteName="Login">
-				<StatusBar style="light" />
+				<View>
+					<StatusBar
+						barStyle={theme === "dark" ? "dark-content" : "light-content"}
+					/>
+				</View>
 				<Stack.Screen
 					name="Login"
 					component={Login}
@@ -160,3 +165,4 @@ export default function App() {
 		</NavigationContainer>
 	);
 }
+
