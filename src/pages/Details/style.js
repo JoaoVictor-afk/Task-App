@@ -2,13 +2,15 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		alignItems: "center",
+		justifyContent: "center",
 	},
 	label: {
 		width: "90%",
 		marginTop: 20,
 		marginLeft: 20,
 		fontSize: 16,
-		color: "#f92e6a",
+		color: "#ff0000",
 		fontWeight: "bold",
 	},
 	textInput: {
@@ -18,11 +20,12 @@ const styles = StyleSheet.create({
 		height: 50,
 		borderBottomWidth: 1,
 		marginLeft: 20,
-		borderBottomColor: "#f92e6a",
+		borderBottomColor: "#ff0000",
 		backgroundColor: "#f5f5f5",
 		borderRadius: 10,
 		marginRight: "auto",
 		marginLeft: "auto",
+		marginBottom: 20,
 	},
 	buttonNew: {
 		position: "absolute",
@@ -30,7 +33,7 @@ const styles = StyleSheet.create({
 		height: 60,
 		bottom: 30,
 		left: 20,
-		backgroundColor: "#f92e6a",
+		backgroundColor: "#ff0000",
 		borderRadius: 50,
 		justifyContent: "center",
 		alignItems: "center",
