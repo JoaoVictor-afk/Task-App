@@ -55,7 +55,7 @@ export default function Task({ navigation, route }) {
 								<FontAwesome
 									name="close"
 									size={30}
-									color="#f92e6a"
+									color="red"
 									fontWeigth="bold"
 								></FontAwesome>
 							</TouchableOpacity>
@@ -65,11 +65,15 @@ export default function Task({ navigation, route }) {
 									navigation.navigate("Details", {
 										id: item.id,
 										description: item.description,
+										value: item.valor,
+										quantit: item.quantit,
 										idUser: route.params.idUse,
 									});
 								}}
 							>
 								{item.description}
+								{item.valor}
+								{item.quantit}
 							</Text>
 						</SafeAreaView>
 					);
@@ -90,11 +94,7 @@ export default function Task({ navigation, route }) {
 				}}
 			>
 				<Text style={styles.iconLogout}>
-					<MaterialCommunityIcons
-						name="location-exit"
-						size={30}
-						color="#f92e6a"
-					/>
+					<MaterialCommunityIcons name="location-exit" size={30} color="red" />
 				</Text>
 			</TouchableOpacity>
 		</SafeAreaView>
