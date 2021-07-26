@@ -1,4 +1,4 @@
-import React, { useState, useEffect, StatusBar } from "react";
+import React, { useState, useEffect } from "react";
 import { NavigationContainer, useTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
@@ -50,7 +50,6 @@ export default function App() {
 	const darkTheme = {
 		colors: {
 			barStyle: "dark-content",
-			backgroundColor: "red",
 			primary: "#000",
 			background: "#000",
 			card: "red",
@@ -132,6 +131,7 @@ export default function App() {
 										fontWeight="bold"
 										color="#b5b5b5"
 									/>
+									Trocar Tema
 								</Text>
 							</TouchableOpacity>
 						),
@@ -165,4 +165,12 @@ export default function App() {
 		</NavigationContainer>
 	);
 }
+
+const styles = StyleSheet.create({
+	touchTheme: {
+		backgroundColor,
+		width: 20,
+		height: 20,
+	},
+});
 
