@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, StatusBar } from "react";
 import { NavigationContainer, useTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import {
@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AppLoading from "expo-app-loading";
+import { StatusBar } from "expo-status-bar";
 
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import Task from "./src/pages/Task";
@@ -47,6 +48,8 @@ export default function App() {
 
 	const darkTheme = {
 		colors: {
+			barStyle: "dark-content",
+			backgroundColor: "red",
 			primary: "#000",
 			background: "#000",
 			card: "red",
@@ -57,6 +60,7 @@ export default function App() {
 	};
 	const lightTheme = {
 		colors: {
+			barStyle: "light-content",
 			primary: "#fff",
 			background: "#fff",
 			card: "red",
@@ -71,16 +75,16 @@ export default function App() {
 		saveData(STORAGE_KEY, theme);
 	};
 
-	if (!Loaded) {
-		return <AppLoading />;
-	}
 	useEffect(() => {
 		readData();
 	}, []);
-
+	if (!Loaded) {
+		return <AppLoading />;
+	}
 	return (
 		<NavigationContainer theme={theme === "dark" ? darkTheme : lightTheme}>
 			<Stack.Navigator initialRouteName="Login">
+				<StatusBar style="light" />
 				<Stack.Screen
 					name="Login"
 					component={Login}
@@ -111,6 +115,9 @@ export default function App() {
 							fontWeight: "bold",
 							fontSize: 28,
 						},
+						headerStyle: {
+							backgroundColor: "#ff0000",
+						},
 						headerRight: () => (
 							<TouchableOpacity onPress={toggleTheme}>
 								<Text>
@@ -132,6 +139,9 @@ export default function App() {
 						headerTitleStyle: {
 							fontWeight: "bold",
 						},
+						headerStyle: {
+							backgroundColor: "#ff0000",
+						},
 					}}
 				/>
 				<Stack.Screen
@@ -140,6 +150,9 @@ export default function App() {
 					options={{
 						headerTitleStyle: {
 							fontWeight: "bold",
+						},
+						headerStyle: {
+							backgroundColor: "#ff0000",
 						},
 					}}
 				/>
