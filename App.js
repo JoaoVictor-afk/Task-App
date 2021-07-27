@@ -1,26 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { NavigationContainer, useTheme } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import {
-	StyleSheet,
-	Switch,
-	TouchableOpacity,
-	Text,
-	Button,
-	Animated,
-	View,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AppLoading from "expo-app-loading";
 import { StatusBar } from "expo-status-bar";
-
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
-import Task from "./src/pages/Task";
+
+import Estoque from "./src/pages/Estoque";
 import NewTask from "./src/pages/NewTask/index";
 import Details from "./src/pages/Details/index";
 import Login from "./src/pages/Login";
 import NewUser from "./src/pages/NewUser";
-import { ThemeProvider } from "styled-components";
 
 const Stack = createStackNavigator();
 
@@ -49,7 +40,6 @@ export default function App() {
 
 	const darkTheme = {
 		colors: {
-			barStyle: "dark-content",
 			primary: "#000",
 			background: "#000",
 			card: "red",
@@ -60,7 +50,6 @@ export default function App() {
 	};
 	const lightTheme = {
 		colors: {
-			barStyle: "light-content",
 			primary: "#fff",
 			background: "#fff",
 			card: "red",
@@ -83,12 +72,10 @@ export default function App() {
 	}
 	return (
 		<NavigationContainer theme={theme === "dark" ? darkTheme : lightTheme}>
+			<View>
+				<StatusBar hidden={true} />
+			</View>
 			<Stack.Navigator initialRouteName="Login">
-				<View>
-					<StatusBar
-						barStyle={theme === "dark" ? "dark-content" : "light-content"}
-					/>
-				</View>
 				<Stack.Screen
 					name="Login"
 					component={Login}
@@ -100,7 +87,7 @@ export default function App() {
 					}}
 				/>
 				<Stack.Screen
-					name="Novo usuario "
+					name="NewUser"
 					component={NewUser}
 					options={{
 						headerShown: false,
@@ -110,8 +97,8 @@ export default function App() {
 					}}
 				/>
 				<Stack.Screen
-					name="E.Estoque"
-					component={Task}
+					name="Estoque"
+					component={Estoque}
 					options={{
 						headerLeft: null,
 
@@ -123,7 +110,7 @@ export default function App() {
 							backgroundColor: "#ff0000",
 						},
 						headerRight: () => (
-							<TouchableOpacity onPress={toggleTheme}>
+							<TouchableOpacity onPress={toggleTheme} style={styles.touchTheme}>
 								<Text>
 									<MaterialCommunityIcons
 										name="theme-light-dark"
@@ -138,8 +125,8 @@ export default function App() {
 					}}
 				/>
 				<Stack.Screen
-					name="Novo Item"
-					component={Newtask}
+					name="NewTask"
+					component={NewTask}
 					options={{
 						headerTitleStyle: {
 							fontWeight: "bold",
@@ -150,7 +137,7 @@ export default function App() {
 					}}
 				/>
 				<Stack.Screen
-					name="Editar item"
+					name="Details"
 					component={Details}
 					options={{
 						headerTitleStyle: {
@@ -168,7 +155,6 @@ export default function App() {
 
 const styles = StyleSheet.create({
 	touchTheme: {
-		backgroundColor,
 		width: 20,
 		height: 20,
 	},
