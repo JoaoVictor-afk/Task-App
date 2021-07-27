@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 48,
-		color: "#f92e6a",
+		color: "#ff0000",
 		marginBottom: 10,
 		fontWeight: "bold",
 	},
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 		padding: 10,
 		height: 50,
 		borderBottomWidth: 1,
-		borderBottomColor: "#f92E6a",
+		borderBottomColor: "#ff0000",
 		marginRight: "auto",
 		marginLeft: "auto",
 		color: "#4d5156",
@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
 		height: 50,
 		justifyContent: "center",
 		alignItems: "center",
-		backgroundColor: "#f92e6a",
+		backgroundColor: "#ff0000",
 		marginTop: 15,
 		borderRadius: 50,
 	},
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
 	},
 	warningAlert: {
 		paddingLeft: 10,
-		color: "rgba(249, 46, 106,.90)",
+		color: "rgba(255, 0, 0,.90)",
 		fontSize: 16,
 	},
 	registration: {

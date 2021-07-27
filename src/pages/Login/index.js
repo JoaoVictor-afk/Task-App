@@ -17,6 +17,7 @@ export default function Login({ navigation }) {
 	const [email, setEmail] = useState("");
 	const [senha, setSenha] = useState("");
 	const [errorLogin, setError] = useState("");
+	const [errorNumber, setErrorNumber] = useState("");
 
 	const loginFirebase = () => {
 		firebase
@@ -48,7 +49,7 @@ export default function Login({ navigation }) {
 			style={styles.container}
 		>
 			<Pressable onPress={Keyboard.dismiss} style={styles.container1}>
-				<Text style={styles.title}>Task</Text>
+				<Text style={styles.title}>Estoque</Text>
 
 				<TextInput
 					style={styles.input}
@@ -56,7 +57,7 @@ export default function Login({ navigation }) {
 					value={email}
 					onChangeText={(text) => setEmail(text)}
 					type="text"
-					placeholderTextColor="rgba(249, 46, 106,.50)"
+					placeholderTextColor="rgba(255, 0, 0,.50)"
 				/>
 				<TextInput
 					style={styles.input}
@@ -65,7 +66,7 @@ export default function Login({ navigation }) {
 					value={senha}
 					onChangeText={(text) => setSenha(text)}
 					type="text"
-					placeholderTextColor="rgba(249, 46, 106,.50)"
+					placeholderTextColor="rgba(255, 0, 0,.50)"
 				/>
 
 				{errorLogin === true ? (

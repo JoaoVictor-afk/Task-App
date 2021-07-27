@@ -55,7 +55,7 @@ export default function NewUser({ navigation }) {
 					value={fullName}
 					onChangeText={(text) => setName(text)}
 					type="text"
-					placeholderTextColor="rgba(249, 46, 106,.50)"
+					placeholderTextColor="rgba(255, 0, 0,.50)"
 				/>
 				<TextInput
 					style={styles.input}
@@ -63,7 +63,7 @@ export default function NewUser({ navigation }) {
 					value={email}
 					onChangeText={(text) => setEmail(text)}
 					type="text"
-					placeholderTextColor="rgba(249, 46, 106,.50)"
+					placeholderTextColor="rgba(255, 0, 0,.50)"
 				/>
 				<TextInput
 					style={styles.input}
@@ -72,7 +72,7 @@ export default function NewUser({ navigation }) {
 					value={senha}
 					onChangeText={(text) => setSenha(text)}
 					type="text"
-					placeholderTextColor="rgba(249, 46, 106,.50)"
+					placeholderTextColor="rgba(255, 0, 0,.50)"
 				/>
 				<TextInput
 					style={styles.input}
@@ -80,7 +80,7 @@ export default function NewUser({ navigation }) {
 					value={number}
 					onChangeText={(text) => setNumber(text)}
 					type="text"
-					placeholderTextColor="rgba(249, 46, 106,.50)"
+					placeholderTextColor="rgba(255, 0, 0,.50)"
 				/>
 
 				{errorRegister === true ? (
@@ -88,7 +88,7 @@ export default function NewUser({ navigation }) {
 						<MaterialCommunityIcons
 							name="alert-circle"
 							size={24}
-							color="rgba(249, 46, 106,.90)"
+							color="rgba(255, 0, 0,.50)"
 						/>
 						<Text style={styles.warningAlert}>Informações invalidas</Text>
 					</View>
