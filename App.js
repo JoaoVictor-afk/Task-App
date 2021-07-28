@@ -104,10 +104,17 @@ export default function App() {
 
 						headerTitleStyle: {
 							fontWeight: "bold",
-							fontSize: 28,
+							fontSize: 38,
+							position: "absolute",
+							right: "10%",
+							left: "38%",
+							bottom: -25,
 						},
 						headerStyle: {
 							backgroundColor: "#ff0000",
+							height: 200,
+							borderBottomStartRadius: 40,
+							borderBottomEndRadius: 40,
 						},
 						headerRight: () => (
 							<TouchableOpacity onPress={toggleTheme} style={styles.touchTheme}>
@@ -118,7 +125,6 @@ export default function App() {
 										fontWeight="bold"
 										color="#b5b5b5"
 									/>
-									Trocar Tema
 								</Text>
 							</TouchableOpacity>
 						),
@@ -130,6 +136,7 @@ export default function App() {
 					options={{
 						headerTitleStyle: {
 							fontWeight: "bold",
+							alignSelf: "auto",
 						},
 						headerStyle: {
 							backgroundColor: "#ff0000",
@@ -142,6 +149,7 @@ export default function App() {
 					options={{
 						headerTitleStyle: {
 							fontWeight: "bold",
+							alignSelf: "center",
 						},
 						headerStyle: {
 							backgroundColor: "#ff0000",
@@ -155,7 +163,13 @@ export default function App() {
 
 const styles = StyleSheet.create({
 	touchTheme: {
-		width: 20,
-		height: 20,
+		position: "absolute",
+		width: 60,
+		height: 60,
+		top: 10,
+		backgroundColor: "red",
+		borderRadius: 50,
+		justifyContent: "center",
+		alignItems: "center",
 	},
 });

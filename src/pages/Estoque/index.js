@@ -66,9 +66,9 @@ export default function Estoque({ navigation, route }) {
 										navigation.navigate("Details", {
 											id: item.id,
 											description: item.description,
-											value: item.valor,
+											valor: item.valor,
 											quantit: item.quantit,
-											idUser: route.params.idUse,
+											idUser: route.params.idUser,
 										});
 									}}
 								>
@@ -96,7 +96,7 @@ export default function Estoque({ navigation, route }) {
 				}}
 			>
 				<Text style={styles.iconLogout}>
-					<MaterialCommunityIcons name="location-exit" size={30} color="red" />
+					<MaterialCommunityIcons name="location-exit" size={50} color="red" />
 				</Text>
 			</TouchableOpacity>
 		</SafeAreaView>

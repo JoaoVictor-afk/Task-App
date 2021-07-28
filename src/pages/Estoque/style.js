@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
 		paddingLeft: 10,
 	},
 	descriptionTask: {
-		width: "75%",
+		width: "95%",
 		alignContent: "flex-end",
 		backgroundColor: "#fff",
 		padding: 15,
@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
 	},
 	touch: {
 		position: "absolute",
-		width: 60,
-		height: 60,
+		width: 80,
+		height: 80,
 		bottom: 30,
 		left: 20,
 		backgroundColor: "red",
@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
 	},
 	buttonLogout: {
 		position: "absolute",
-		width: 60,
-		height: 60,
+		width: 80,
+		height: 80,
 		bottom: 30,
 		right: 20,
 		justifyContent: "center",
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
 	},
 	iconLogout: {
 		color: "#fff",
-		fontSize: 30,
+		fontSize: 40,
 		fontWeight: "bold",
 	},
 });

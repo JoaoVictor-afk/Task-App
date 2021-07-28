@@ -26,7 +26,7 @@ export default function Login({ navigation }) {
 			.then((userCredential) => {
 				// Signed in
 				var user = userCredential.user;
-				navigation.navigate("Task", { idUser: user.uid });
+				navigation.navigate("Estoque", { idUser: user.uid });
 			})
 			.catch((error) => {
 				setError(true);
@@ -38,7 +38,7 @@ export default function Login({ navigation }) {
 	useEffect(() => {
 		firebase.auth().onAuthStateChanged((user) => {
 			if (user) {
-				navigation.navigate("Task", { idUser: user.uid });
+				navigation.navigate("Estoque", { idUser: user.uid });
 			}
 		});
 	}, []);

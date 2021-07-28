@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity } from "react-native";
+import {
+	View,
+	Text,
+	TextInput,
+	TouchableOpacity,
+	Pressable,
+	Keyboard,
+} from "react-native";
 import firebase from "../../config/firebase";
 import styles from "../NewTask/style";
 
@@ -15,11 +22,11 @@ export default function Details({ navigation, route }) {
 
 	function editTask(description, id) {
 		database.collection(route.params.idUser).doc(id).update({
-			description: description,
-			value: valor,
-			quantit: quantit,
+			description: descriptionEdit,
+			valor: valorEdit,
+			quantit: quantitEdit,
 		});
-		navigation.navigate("Task");
+		navigation.navigate("Estoque");
 	}
 
 	return (
@@ -27,14 +34,18 @@ export default function Details({ navigation, route }) {
 			<Text style={styles.label}>Nome</Text>
 			<TextInput
 				style={styles.textInput}
-				placeholder="Ex: Estudar"
+				placeholder="Ex: 200"
+				placeholderTextColor="rgba(255, 0, 0,.60)"
+				color="red"
 				onChangeText={setDescriptionEdit}
 				value={descriptionEdit}
 			/>
 			<Text style={styles.label}>Valor</Text>
 			<TextInput
 				style={styles.textInput}
-				placeholder="Ex: Estudar"
+				placeholder="Ex: 200"
+				placeholderTextColor="rgba(255, 0, 0,.60)"
+				color="red"
 				onChangeText={setValorEdit}
 				value={valorEdit}
 			/>
@@ -42,7 +53,9 @@ export default function Details({ navigation, route }) {
 			<Text style={styles.label}>Quantidade</Text>
 			<TextInput
 				style={styles.textInput}
-				placeholder="Ex: Estudar"
+				placeholder="Ex: 200"
+				placeholderTextColor="rgba(255, 0, 0,.60)"
+				color="red"
 				onChangeText={setQuantitEdit}
 				value={quantitEdit}
 			/>
@@ -50,7 +63,7 @@ export default function Details({ navigation, route }) {
 			<TouchableOpacity
 				style={styles.buttonNew}
 				onPress={() => {
-					addTask();
+					editTask();
 				}}
 			>
 				<Text style={styles.iconSave}>Save</Text>
