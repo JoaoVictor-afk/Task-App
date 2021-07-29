@@ -6,6 +6,7 @@ import {
 	TouchableOpacity,
 	FlatList,
 } from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import firebase from "../../config/firebase";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "./style";
@@ -13,6 +14,7 @@ import styles from "./style";
 export default function Estoque({ navigation, route }) {
 	const [task, setTask] = useState([]);
 	const database = firebase.firestore();
+	const Drawer = createDrawerNavigator();
 
 	function lougout() {
 		firebase
@@ -73,7 +75,33 @@ export default function Estoque({ navigation, route }) {
 									}}
 								>
 									{item.description}
+								</Text>
+								<Text
+									style={styles.descriptionTask}
+									onPress={() => {
+										navigation.navigate("Details", {
+											id: item.id,
+											description: item.description,
+											valor: item.valor,
+											quantit: item.quantit,
+											idUser: route.params.idUser,
+										});
+									}}
+								>
 									{item.valor}
+								</Text>
+								<Text
+									style={styles.descriptionTask}
+									onPress={() => {
+										navigation.navigate("Details", {
+											id: item.id,
+											description: item.description,
+											valor: item.valor,
+											quantit: item.quantit,
+											idUser: route.params.idUser,
+										});
+									}}
+								>
 									{item.quantit}
 								</Text>
 							</View>

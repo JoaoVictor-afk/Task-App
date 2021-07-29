@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
 	descriptionTask: {
 		width: "95%",
 		alignContent: "flex-end",
-		backgroundColor: "#fff",
+		backgroundColor: "#bbb",
 		padding: 15,
 		paddingHorizontal: 20,
 		borderRadius: 10,
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
 		marginRight: 15,
 		color: "#000",
 		borderBottomWidth: 2,
-		borderBottomColor: "#f92E6a",
+		borderBottomColor: "red",
 	},
 	touch: {
 		position: "absolute",

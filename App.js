@@ -6,6 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import AppLoading from "expo-app-loading";
 import { StatusBar } from "expo-status-bar";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import Estoque from "./src/pages/Estoque";
 import NewTask from "./src/pages/NewTask/index";
@@ -14,6 +15,7 @@ import Login from "./src/pages/Login";
 import NewUser from "./src/pages/NewUser";
 
 const Stack = createStackNavigator();
+const Drawer = createDrawerNavigator();
 
 export default function App() {
 	const [Loaded, setLoaded] = useState(false);
