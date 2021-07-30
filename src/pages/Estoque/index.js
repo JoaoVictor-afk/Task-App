@@ -7,12 +7,15 @@ import {
 	FlatList,
 } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import AppLoading from "expo-app-loading";
+
 import firebase from "../../config/firebase";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "./style";
 
 export default function Estoque({ navigation, route }) {
 	const [task, setTask] = useState([]);
+	const [Loaded, setLoaded] = useState(false);
 	const database = firebase.firestore();
 	const Drawer = createDrawerNavigator();
 
@@ -39,8 +42,13 @@ export default function Estoque({ navigation, route }) {
 				list.push({ ...doc.data(), id: doc.id });
 			});
 			setTask(list);
+			setLoaded(true);
 		});
 	}, []);
+
+	if (!Loaded) {
+		return <AppLoading />;
+	}
 
 	return (
 		<SafeAreaView style={styles.container}>
