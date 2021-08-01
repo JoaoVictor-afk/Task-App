@@ -6,13 +6,18 @@ import {
 	TouchableOpacity,
 	FlatList,
 } from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import AppLoading from "expo-app-loading";
+
 import firebase from "../../config/firebase";
 import { FontAwesome, MaterialCommunityIcons } from "@expo/vector-icons";
 import styles from "./style";
 
-export default function Task({ navigation, route }) {
+export default function Estoque({ navigation, route }) {
 	const [task, setTask] = useState([]);
+	const [Loaded, setLoaded] = useState(false);
 	const database = firebase.firestore();
+	const Drawer = createDrawerNavigator();
 
 	function lougout() {
 		firebase
@@ -37,8 +42,13 @@ export default function Task({ navigation, route }) {
 				list.push({ ...doc.data(), id: doc.id });
 			});
 			setTask(list);
+			setLoaded(true);
 		});
 	}, []);
+
+	if (!Loaded) {
+		return <AppLoading />;
+	}
 
 	return (
 		<SafeAreaView style={styles.container}>
@@ -59,22 +69,50 @@ export default function Task({ navigation, route }) {
 									fontWeigth="bold"
 								></FontAwesome>
 							</TouchableOpacity>
-							<Text
-								style={styles.descriptionTask}
-								onPress={() => {
-									navigation.navigate("Details", {
-										id: item.id,
-										description: item.description,
-										value: item.valor,
-										quantit: item.quantit,
-										idUser: route.params.idUse,
-									});
-								}}
-							>
-								{item.description}
-								{item.valor}
-								{item.quantit}
-							</Text>
+							<View>
+								<Text
+									style={styles.descriptionTask}
+									onPress={() => {
+										navigation.navigate("Details", {
+											id: item.id,
+											description: item.description,
+											valor: item.valor,
+											quantit: item.quantit,
+											idUser: route.params.idUser,
+										});
+									}}
+								>
+									{item.description}
+								</Text>
+								<Text
+									style={styles.descriptionTask}
+									onPress={() => {
+										navigation.navigate("Details", {
+											id: item.id,
+											description: item.description,
+											valor: item.valor,
+											quantit: item.quantit,
+											idUser: route.params.idUser,
+										});
+									}}
+								>
+									{item.valor}
+								</Text>
+								<Text
+									style={styles.descriptionTask}
+									onPress={() => {
+										navigation.navigate("Details", {
+											id: item.id,
+											description: item.description,
+											valor: item.valor,
+											quantit: item.quantit,
+											idUser: route.params.idUser,
+										});
+									}}
+								>
+									{item.quantit}
+								</Text>
+							</View>
 						</SafeAreaView>
 					);
 				}}
@@ -94,7 +132,7 @@ export default function Task({ navigation, route }) {
 				}}
 			>
 				<Text style={styles.iconLogout}>
-					<MaterialCommunityIcons name="location-exit" size={30} color="red" />
+					<MaterialCommunityIcons name="location-exit" size={50} color="red" />
 				</Text>
 			</TouchableOpacity>
 		</SafeAreaView>
